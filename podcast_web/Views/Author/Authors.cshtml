@@ -1,0 +1,46 @@
+﻿@model podcast_web.ViewModels.AuthorViewModel
+@{
+    ViewBag.Title = "Authors";
+}
+
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div style="display: flex; flex-direction:column;">
+
+            @if (Model.Authors.Count == 0)
+            {
+                <p>No podcasts yet!</p>
+            }
+
+            else
+            {
+                foreach (var a in Model.Authors)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title" style="margin:0;">@a.Name  @a.Surname</h2>
+                            <p class="card-text">@a.AuthorJob</p>
+                            @*<h6>Podcasts: </h6>
+                            @foreach (var p in a.Podcasts)
+                            {
+                                <p>@p.Title</p>
+                            }*@
+                            <a href="/Author/Detail/@a.AuthorID" class="btn btn-primary">Detail</a>
+                        </div>
+                        <div class="card-footer">
+                            <p>19.11.2020</p>
+                        </div>
+
+                    </div>
+                    <hr class="my-4">
+
+                }
+            }
+
+        </div>
+    </div>
+</div>

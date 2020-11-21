@@ -1,0 +1,45 @@
+﻿@model podcast_web.ViewModels.PodcastsViewModel
+@{
+    ViewBag.Title = "All";
+}
+
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div style="display: flex; justify-content:flex-end; flex-direction:column; align-items:center;">
+
+            @if (Model.Podcasts.Count == 0)
+            {
+                <p>No podcasts yet!</p>
+            }
+
+            else
+            {
+                foreach (var p in Model.Podcasts)
+                {
+                    <div class="card">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img src="@p.ImgSource" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title" style="margin:0;">@p.Title</h3>
+                            <p class="card-text">@p.Description</p>
+                            <a href="/Podcast/Detail/@p.PodcastId" class="btn btn-primary">Detail</a>
+                        </div>
+                        <div class="card-footer">@p.Date</div>
+
+                    </div>
+                    <hr class="my-4">
+
+                }
+            }
+
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,61 @@
+﻿@model podcast_web.ViewModels.AuthorViewModel
+
+@{
+    ViewBag.Title = "PodcastList";
+}
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+<div class="row mt-5">
+    <div class="">
+        <button type="button" style="margin-left: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add Author
+        </button>
+    </div>
+</div>
+
+<div class="row mt-8">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>SURNAME</th>
+                    <th>JOB</th>
+                    <th>ACTION</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Authors.Count == 0)
+                {
+                    <tr>
+                        <td>No authors yet!</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var a in Model.Authors)
+                    {
+                        <tr>
+                            <td>@a.AuthorID</td>
+                            <td>@a.Name</td>
+                            <td>@a.Surname</td>
+                            <td>@a.AuthorJob</td>
+                            <td> 
+                            <a href="/ManageAuthors/EditAuthor/@a.AuthorID" class="btn btn-primary">Detail</a>
+                            <a style="margin-left:4px;" href="/ManageAuthors/DeleteAuthor/@a.AuthorID" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

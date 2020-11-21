@@ -1,0 +1,23 @@
+﻿@model podcast_web.Models.Podcast
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<br />
+
+<div style="display: flex; justify-content:flex-end; flex-direction:column; align-items:center;">
+    <div class="card">
+        <div class="embed-responsive embed-responsive-16by9">
+            <img src="@Model.ImgSource" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+            <h1 class="card-title" style="margin:0;">@Model.Title</h1>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <div class="card-footer">@Model.Date</div>
+
+    </div>
+</div>

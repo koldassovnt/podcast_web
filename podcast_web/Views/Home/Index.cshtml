@@ -1,0 +1,58 @@
+﻿@model podcast_web.ViewModels.PodcastsViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron jumbotron-fluid">
+    <h1 class="display-4">Welcome to ProgPodcasts!</h1>
+    <p class="lead">
+        Aliquam eget erat nec eros eleifend
+        maximus eget sit amet augue. Etiam at dolor at ante
+        consectetur venenatis. Suspendisse pellentesque leo
+        ac purus ultrices tincidunt. Integer massa odio,
+        porta et egestas et, commodo in lacus. Pellentesque
+        non sapien tellus. Nulla sit amet nunc semper, pharetra
+        odio pretium, feugiat quam.
+    </p>
+    <hr class="my-4">
+    <p>Pellentesque pretium nec purus a semper. Integer maximus libero ut porttitor elementum. </p>
+    <a class="btn btn-primary btn-lg" href="/Home/About" role="button">Learn more</a>
+</div>
+
+<hr class="my-4">
+
+<div class="container">
+    <div class="row">
+        <div style="display: flex; justify-content:flex-end; flex-direction:column; align-items:center;">
+
+            @if (Model.Podcasts.Count == 0)
+            {
+                <p>No podcasts yet!</p>
+            }
+
+            else
+            {
+                foreach (var p in Model.Podcasts)
+                {
+                    <div class="card">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <img src="@p.ImgSource" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title" style="margin:0;">@p.Title</h3>
+                            <p class="card-text">@p.Description</p>
+                            <a href="/Podcast/Detail/@p.PodcastId" class="btn btn-primary">Detail</a>
+                        </div>
+                        <div class="card-footer">@p.Date</div>
+
+                    </div>
+                    <hr class="my-4">
+
+                }
+            }
+
+        </div>
+    </div>
+</div>
+
