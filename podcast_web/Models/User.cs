@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace podcast_web.Models
 {
+    // : IdentityUser
     public class User
     {
         public User() => Podcasts = new HashSet<Podcast>();
@@ -29,7 +30,6 @@ namespace podcast_web.Models
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         public string Password { get; set; }
         public string Birthdate { get; set; }
-        public bool Is_Admin { get; set; }
         public virtual ICollection<Podcast> Podcasts { get; set; }
 
 

@@ -6,9 +6,8 @@ using System.Web;
 
 namespace podcast_web.ViewModels
 {
-    public class AuthorViewModel
+    public class PlatformViewModel
     {
-        public List<Author> Authors { get; set; }
-        public List<Company> Companies { get; set; }
+        public List<Platform> Platforms { get; set; }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model podcast_web.Models.ProgrammingLanguage
+@{
+    ViewBag.Title = "EditProgrammingLanguage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+@using (Html.BeginForm("EditProgrammingLanguage", "ManageProgrammingLanguages", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.ProgrammingLanguageID)
+    <div class="form-group">
+        <label>
+            Programming Language Name:
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        </label>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Edit</button>
+    </div>
+
+}
+
+

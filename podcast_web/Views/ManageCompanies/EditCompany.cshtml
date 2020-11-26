@@ -1,0 +1,32 @@
+﻿@model podcast_web.Models.Company
+@{
+    ViewBag.Title = "EditCompany";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+<form action="EditCompany" method="post">
+    <input type="hidden" value="@Model.CompanyID" name="id" />
+    <div class="form-group">
+        <label>
+            Company Name:
+            <input type="text" class="form-control" name="title" value="@Model.Name">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Company Description:
+            <input type="text" class="form-control" name="description" value="@Model.Description">
+        </label>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Edit</button>
+    </div>
+</form>
+
+

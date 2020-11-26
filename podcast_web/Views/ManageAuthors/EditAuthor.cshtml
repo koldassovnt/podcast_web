@@ -1,0 +1,47 @@
+﻿@model podcast_web.Models.Author
+@{
+    ViewBag.Title = "EditAuthor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+@using (Html.BeginForm("EditAuthor", "ManageAuthors", FormMethod.Post))
+{
+<div class="form-group">
+    @Html.HiddenFor(model => model.AuthorID)
+    <label>
+        Author Name:
+        @Html.EditorFor(model => model.Name,  new { htmlAttributes = new { @class = "form-control" } })
+    </label>
+</div>
+    <div class="form-group">
+        <label>
+            Author Surname:
+            @Html.EditorFor(model => model.Surname,  new { htmlAttributes = new { @class = "form-control" } })
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Author Job:
+            @Html.EditorFor(model => model.AuthorJob,  new { htmlAttributes = new { @class = "form-control" } })
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Author Company:
+            @Html.DropDownListFor(model => model.CompanyID, ViewBag.Companies as SelectList, new { @class = "form-control" })
+        </label>
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Edit</button>
+    </div>
+}
+
+

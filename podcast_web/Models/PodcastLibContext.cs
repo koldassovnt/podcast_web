@@ -7,6 +7,8 @@ using System.Web;
 
 namespace podcast_web.Models
 {
+
+    // : IdentityDbContext<User>
     public class PodcastLibContext : DbContext
     {
 
@@ -19,6 +21,7 @@ namespace podcast_web.Models
         public DbSet<Podcast> Podcasts { get; set; }
         public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

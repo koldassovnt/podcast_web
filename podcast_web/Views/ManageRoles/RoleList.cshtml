@@ -1,0 +1,88 @@
+﻿@model podcast_web.ViewModels.RoleViewModel
+
+@{
+    ViewBag.Title = "RoleList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h1></h1>
+<h1></h1>
+<h1></h1>
+<h1></h1>
+
+<div class="row mt-5">
+    <div class="">
+        <button type="button" style="margin-left: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add Role
+        </button>
+    </div>
+</div>
+
+<div class="row mt-8">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>ACTION</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Roles.Count == 0)
+                {
+                    <tr>
+                        <td>No roles yet!</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var r in Model.Roles)
+                    {
+                        <tr>
+                            <td>@r.RoleId</td>
+                            <td>@r.Name</td>
+                            <td>
+                                <a href="/ManageRoles/EditRole/@r.RoleId" class="btn btn-primary">Detail</a>
+                                <a style="margin-left:4px;" href="/ManageRoles/DeleteRole/@r.RoleId" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Company</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("RoleList", "ManageRoles", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label>
+                            Role Name:
+                            <input type="text" class="form-control" name="name">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,7 +1,8 @@
-﻿@model podcast_web.ViewModels.AuthorViewModel
+﻿@model podcast_web.Models.Author
 
 @{
     ViewBag.Title = "PodcastList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h1></h1>
@@ -31,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.Authors.Count == 0)
+                @if (ViewBag.Authors.Count == 0)
                 {
                     <tr>
                         <td>No authors yet!</td>
@@ -39,16 +40,16 @@
                 }
                 else
                 {
-                    foreach (var a in Model.Authors)
+                    foreach (var a in ViewBag.Authors)
                     {
                         <tr>
                             <td>@a.AuthorID</td>
                             <td>@a.Name</td>
                             <td>@a.Surname</td>
                             <td>@a.AuthorJob</td>
-                            <td> 
-                            <a href="/ManageAuthors/EditAuthor/@a.AuthorID" class="btn btn-primary">Detail</a>
-                            <a style="margin-left:4px;" href="/ManageAuthors/DeleteAuthor/@a.AuthorID" class="btn btn-danger">Delete</a>
+                            <td>
+                                <a href="/ManageAuthors/EditAuthor/@a.AuthorID" class="btn btn-primary">Detail</a>
+                                <a style="margin-left:4px;" href="/ManageAuthors/DeleteAuthor/@a.AuthorID" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     }
@@ -59,3 +60,48 @@
 </div>
 
 
+
+<div class="modal fade" id="exampleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Author</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AuthorList", "ManageAuthors", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label>
+                            Author Name:
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Author Surname:
+                            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Author Job:
+                            @Html.EditorFor(model => model.AuthorJob, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Author Company:
+                            @Html.DropDownListFor(model => model.CompanyID, ViewBag.Companies as SelectList, new { @class = "form-control" })
+                        </label>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

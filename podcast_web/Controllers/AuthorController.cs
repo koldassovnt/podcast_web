@@ -17,8 +17,9 @@ namespace podcast_web.Controllers
         public ActionResult Authors()
         {
             IEnumerable<Author> authors = db.Authors;
-            var viewModel = new AuthorViewModel() { Authors = authors.ToList() };
-
+            IEnumerable<Company> companies = db.Companies;
+            var viewModel = new AuthorViewModel() { Authors = authors.ToList(), Companies = companies.ToList() };
+  
             return View(viewModel);
         }
 
@@ -36,6 +37,9 @@ namespace podcast_web.Controllers
                     break;
                 }
             }
+            IEnumerable<Company> companies = db.Companies;
+            var company = companies.First(c => c.CompanyID == author.CompanyID);
+            ViewBag.Company = company;
 
             return View(author);
         }
