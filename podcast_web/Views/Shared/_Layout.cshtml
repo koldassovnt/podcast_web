@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -18,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ProgPodcaster", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ProgPodcaster", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @id = "Title" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -28,9 +29,9 @@
                     <li>@Html.ActionLink("Authors", "Authors", "Author")</li>
                     <li>@Html.ActionLink("Login", "Login", "Auth")</li>
                     <li>@Html.ActionLink("Register", "Register", "Auth")</li>
-
                 </ul>
             </div>
+
         </div>
     </div>
     <div class="container body-content">
@@ -40,12 +41,15 @@
     <!-- FOOTER -->
     <footer class="container" style="display:flex; justify-content:space-between;">
         <p class="float-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; 2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
     </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
 
 
 </body>

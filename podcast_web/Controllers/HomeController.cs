@@ -11,17 +11,28 @@ namespace podcast_web.Controllers
 {
     public class HomeController : Controller
     {
-
         // создаем контекст данных
         PodcastLibContext db = new PodcastLibContext();
 
-
+        [HttpGet]
         public ActionResult Index()
         {
             IEnumerable<Podcast> podcasts = db.Podcasts;
             var viewModel = new PodcastsViewModel() { Podcasts = podcasts.ToList() };
+            ViewBag.ViewModel = viewModel;
 
-            return View(viewModel);  
+            return View();  
+        }
+
+        [HttpPost]
+        public ActionResult Index(string Title)
+        {
+
+            var podcasts = db.Podcasts.Where(p => p.Title.Equals(Title));
+            var viewModel = new PodcastsViewModel() { Podcasts = podcasts.ToList() };
+            ViewBag.ViewModel = viewModel;
+
+            return View();
         }
 
         public ActionResult About()
@@ -29,6 +40,18 @@ namespace podcast_web.Controllers
             return View();
         }
 
-        
+
+        public ActionResult AutocompleteSearch(string term)
+        {
+            var res = db.Podcasts.Where(p => p.Title.Contains(term))
+                                        .Select(p => new { value = p.Title })
+                                        .Distinct();
+                
+
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

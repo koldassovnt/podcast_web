@@ -17,9 +17,9 @@ namespace podcast_web.Models
             };
 
             var authors = new List<Author> { 
-                new Author {AuthorID = 1, Name = "Christian", Surname = "Bale", AuthorJob = "JS Dev", CompanyID = 1},
-                new Author {AuthorID = 2, Name = "Leonardo", Surname = "Di Caprio", AuthorJob = "PHP Dev", CompanyID = 2},
-                new Author {AuthorID = 3, Name = "Robert", Surname = "De Niro", AuthorJob = "C++ Dev", CompanyID = 2}
+                new Author {AuthorID = 1, Name = "Christian", Surname = "Bale", AuthorJob = "JS Dev", CompanyID = 1, AuthorImg="https://celebritycontacts1.com/wp-content/uploads/2020/06/Christian-Bale.jpg"},
+                new Author {AuthorID = 2, Name = "Leonardo", Surname = "Di Caprio", AuthorJob = "PHP Dev", CompanyID = 2, AuthorImg="https://i.pinimg.com/736x/24/86/23/2486237ab32f6d2e6ae2b30e59089f9a.jpg"},
+                new Author {AuthorID = 3, Name = "Robert", Surname = "De Niro", AuthorJob = "C++ Dev", CompanyID = 2, AuthorImg="https://api.time.com/wp-content/uploads/2015/09/150924_ho_intern.jpg?w=600&quality=85"}
             };
 
             var platforms = new List<Platform> { 

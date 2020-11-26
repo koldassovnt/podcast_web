@@ -91,6 +91,12 @@
                     </div>
                     <div class="form-group">
                         <label>
+                            Author Image:
+                            @Html.EditorFor(model => model.AuthorImg, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
                             Author Company:
                             @Html.DropDownListFor(model => model.CompanyID, ViewBag.Companies as SelectList, new { @class = "form-control" })
                         </label>
