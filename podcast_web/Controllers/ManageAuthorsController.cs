@@ -16,18 +16,28 @@ namespace podcast_web.Controllers
         // GET: ManageAuthors
         public ActionResult AuthorList()
         {
+            if (Session["Email"] != null)
+            {
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
+                {
+                    //IEnumerable<Company> companies = db.Companies;
+                    IEnumerable<Author> authors = db.Authors;
+                    var viewModel = new AuthorViewModel() { Authors = authors.ToList() };
 
-         
-            //IEnumerable<Company> companies = db.Companies;
-            IEnumerable<Author> authors = db.Authors;
-            var viewModel = new AuthorViewModel() { Authors = authors.ToList()};
+                    // Формируем список команд для передачи в представление
+                    SelectList companies = new SelectList(db.Companies, "CompanyID", "Name");
+                    ViewBag.Companies = companies;
+                    ViewBag.Authors = viewModel.Authors;
 
-            // Формируем список команд для передачи в представление
-            SelectList companies = new SelectList(db.Companies, "CompanyID", "Name");
-            ViewBag.Companies = companies;
-            ViewBag.Authors = viewModel.Authors;
+                    return View();
+                }
+            }
 
-            return View();
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
+
         }
 
         [HttpPost]
@@ -49,23 +59,33 @@ namespace podcast_web.Controllers
         [HttpGet]
         public ActionResult EditAuthor(int id)
         {
-            IEnumerable<Author> authors = db.Authors;
-            Author author = new Author();
-
-
-            foreach (var a in authors.ToList())
+            if (Session["Email"] != null)
             {
-                if (a.AuthorID == id)
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
                 {
-                    author = a;
-                    break;
+
+                    IEnumerable<Author> authors = db.Authors;
+                    Author author = new Author();
+
+
+                    foreach (var a in authors.ToList())
+                    {
+                        if (a.AuthorID == id)
+                        {
+                            author = a;
+                            break;
+                        }
+                    }
+                    // Формируем список команд для передачи в представление
+                    SelectList companies = new SelectList(db.Companies, "CompanyID", "Name");
+                    ViewBag.Companies = companies;
+
+                    return View(author);
                 }
             }
-            // Формируем список команд для передачи в представление
-            SelectList companies = new SelectList(db.Companies, "CompanyID", "Name");
-            ViewBag.Companies = companies;
-
-            return View(author);
+            return RedirectToAction("Error403", "Home", new { area = "" });
         }
 
         [HttpPost]

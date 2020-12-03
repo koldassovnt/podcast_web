@@ -18,6 +18,17 @@ namespace podcast_web.Controllers
         public ActionResult Index()
         {
             IEnumerable<Podcast> podcasts = db.Podcasts;
+            IEnumerable<Author> authors = db.Authors;
+            IEnumerable<ProgrammingLanguage> pLangs = db.ProgrammingLanguages;
+
+            foreach (var p in podcasts.ToList())
+            {
+                var a = authors.Single(au => au.AuthorID == p.AuthorID);
+                var pl = pLangs.Single(plang => plang.ProgrammingLanguageID == p.ProgrammingLanguageID);
+                p.Author = a;
+                p.ProgrammingLanguage = pl;
+            }
+
             var viewModel = new PodcastsViewModel() { Podcasts = podcasts.ToList() };
             ViewBag.ViewModel = viewModel;
 
@@ -52,6 +63,12 @@ namespace podcast_web.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpGet]
+        public ActionResult Error403()
+        {
+            return View();
+        }
 
     }
 }

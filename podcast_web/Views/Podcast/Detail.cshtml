@@ -16,8 +16,15 @@
         <div class="card-body">
             <h1 class="card-title" style="margin:0;">@Model.Title</h1>
             <p class="card-text">@Model.Description</p>
+            <p class="card-text">Author is: @Model.Author.Name</p>
+            <p class="card-text">Programming Language: @Model.ProgrammingLanguage.Name</p>
         </div>
         <div class="card-footer">@Model.Date</div>
+
+        @if (Session["Email"] != null)
+        {
+            <a href="/Profile/AddUserPodcast/@Model.PodcastId" class="btn btn-success">Add Podcast</a>
+        }
 
     </div>
 </div>

@@ -25,6 +25,18 @@ namespace podcast_web.Controllers
             return View();
         }
 
+        private void AddOrUpdateUser(User user, IEnumerable<Role> roles)
+        {
+            var role = roles.FirstOrDefault(r => r.Name == "ROLE_USER");
+            if (role == null)
+            {
+                role = new Role() { Name = "ROLE_USER" };
+                db.Roles.Add(role);
+            }
+            user.Roles.Add(role);
+            db.SaveChanges();
+        }
+
         //POST: Register
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -39,6 +51,8 @@ namespace podcast_web.Controllers
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.Users.Add(_user);
                     db.SaveChanges();
+
+                    AddOrUpdateUser(_user, db.Roles);
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
@@ -79,7 +93,7 @@ namespace podcast_web.Controllers
         public ActionResult Logout()
         {
             Session.Clear();//remove session
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
 

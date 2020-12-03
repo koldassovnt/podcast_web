@@ -14,9 +14,14 @@
             <img class="card-img-top" src="@Model.AuthorImg" alt="Card image cap">
             <h2 class="card-title" style="margin:0;">@Model.Name  @Model.Surname</h2>
             <p class="card-text">@Model.AuthorJob</p>
+            <h3>Podcasts: </h3>
+            @foreach (var p in Model.Podcasts)
+            {
+                <p>@p.Title / @p.Date</p>
+            }
         </div>
         <div class="card-footer">
-            <h4 class="card-text">@ViewBag.Company.Name</h4>
+            <h4 class="card-text">Works in: @ViewBag.Company.Name</h4>
         </div>
 
     </div>

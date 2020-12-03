@@ -18,6 +18,13 @@ namespace podcast_web.Controllers
         {
             IEnumerable<Author> authors = db.Authors;
             IEnumerable<Company> companies = db.Companies;
+            IEnumerable<Podcast> podcasts = db.Podcasts;
+
+            foreach (var a in authors.ToList()) 
+            {
+                var p = podcasts.Where(pod => pod.AuthorID == a.AuthorID).ToList();
+                a.Podcasts = p;
+            }
             var viewModel = new AuthorViewModel() { Authors = authors.ToList(), Companies = companies.ToList() };
   
             return View(viewModel);
@@ -27,6 +34,9 @@ namespace podcast_web.Controllers
         public ActionResult Detail(int id)
         {
             IEnumerable<Author> authors = db.Authors;
+            IEnumerable<Podcast> podcasts = db.Podcasts;
+            IEnumerable<Company> companies = db.Companies;
+
             Author author = new Author();
 
             foreach (var a in authors.ToList())
@@ -37,7 +47,10 @@ namespace podcast_web.Controllers
                     break;
                 }
             }
-            IEnumerable<Company> companies = db.Companies;
+
+            var p = podcasts.Where(pod => pod.AuthorID == author.AuthorID).ToList();
+            author.Podcasts = p;
+
             var company = companies.First(c => c.CompanyID == author.CompanyID);
             ViewBag.Company = company;
 

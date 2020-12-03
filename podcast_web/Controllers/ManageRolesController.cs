@@ -17,9 +17,19 @@ namespace podcast_web.Controllers
         // GET: ManageRoles
         public ActionResult RoleList()
         {
-            IEnumerable<Role> roles = db.Roles;
-            var viewModel = new RoleViewModel() { Roles = roles.ToList() };
-            return View(viewModel);
+            if (Session["Email"] != null)
+            {
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
+                {
+                    IEnumerable<Role> roles = db.Roles;
+                    var viewModel = new RoleViewModel() { Roles = roles.ToList() };
+                    return View(viewModel);
+                }
+            }
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
         [HttpPost]
@@ -42,18 +52,28 @@ namespace podcast_web.Controllers
         [HttpGet]
         public ActionResult EditRole(int id)
         {
-            IEnumerable<Role> roles = db.Roles;
-            Role role = new Role();
-
-            foreach (var r in roles.ToList())
+            if (Session["Email"] != null)
             {
-                if (r.RoleId == id)
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
                 {
-                    role = r;
-                    break;
+                    IEnumerable<Role> roles = db.Roles;
+                    Role role = new Role();
+
+                    foreach (var r in roles.ToList())
+                    {
+                        if (r.RoleId == id)
+                        {
+                            role = r;
+                            break;
+                        }
+                    }
+                    return View(role);
                 }
             }
-            return View(role);
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
         [HttpPost]

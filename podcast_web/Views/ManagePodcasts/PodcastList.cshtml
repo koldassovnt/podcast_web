@@ -1,5 +1,4 @@
-﻿@model podcast_web.ViewModels.PodcastsViewModel
-
+﻿@model podcast_web.Models.Podcast
 @{
     ViewBag.Title = "PodcastList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -34,27 +33,27 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.Podcasts.Count == 0)
+                @if (ViewBag.Podcasts.Count == 0)
                 {
-                <tr>
-                    <td>No podcasts yet!</td>
-                </tr>
+                    <tr>
+                        <td>No podcasts yet!</td>
+                    </tr>
                 }
                 else
                 {
-                    foreach (var p in Model.Podcasts)
+                    foreach (var p in ViewBag.Podcasts)
                     {
-            <tr>
-                <td>@p.PodcastId</td>
-                <td>@p.Title</td>
-                <td>@p.Description</td>
-                <td>@p.Date</td>
-                <td>@p.Source</td>
-                <td> 
-                <a href="/ManagePodcasts/EditPodcast/@p.PodcastId" class="btn btn-primary">Detail</a>
-                <a style="margin-left:4px;" href="/ManagePodcasts/DeletePodcast/@p.PodcastId" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+                        <tr>
+                            <td>@p.PodcastId</td>
+                            <td>@p.Title</td>
+                            <td>@p.Description</td>
+                            <td>@p.Date</td>
+                            <td>@p.Source</td>
+                            <td style="display:flex;">
+                                <a href="/ManagePodcasts/EditPodcast/@p.PodcastId" class="btn btn-primary btn-sm">Detail</a>
+                                <a style="margin-left:4px;" href="/ManagePodcasts/DeletePodcast/@p.PodcastId" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
                     }
                 }
             </tbody>
@@ -79,30 +78,49 @@
                     <div class="form-group">
                         <label>
                             Podcast Title:
-                            <input type="text" class="form-control" name="title">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                         </label>
                     </div>
-                        <div class="form-group">
-                            <label>
-                                Podcast Description:
-                                <input type="text" class="form-control" name="description">
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Podcast Date:
-                                <input class="form-control" data-date-format="yyyy/mm/dd" id="datepicker_add" name="date">
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Podcast Source:
-                                <input type="text" class="form-control" name="source">
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">Add</button>
-                        </div>
+                    <div class="form-group">
+                        <label>
+                            Podcast Description:
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Podcast Date:
+                            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Podcast Source:
+                            @Html.EditorFor(model => model.Source, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Podcast Img Source:
+                            @Html.EditorFor(model => model.ImgSource, new { htmlAttributes = new { @class = "form-control" } })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Podcast Author:
+                            @Html.DropDownListFor(model => model.AuthorID, ViewBag.Authors as SelectList, new { @class = "form-control" })
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Podcast Programming Language:
+                            @Html.DropDownListFor(model => model.ProgrammingLanguageID, ViewBag.ProgrammingLanguages as SelectList, new { @class = "form-control" })
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
                 }
             </div>
         </div>

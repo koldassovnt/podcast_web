@@ -17,10 +17,20 @@ namespace podcast_web.Controllers
         // GET: ManageUsers
         public ActionResult UserList()
         {
-            IEnumerable<User> users = db.Users;
-            var viewModel = new AuthViewModel() { Users = users.ToList() };
+            if (Session["Email"] != null)
+            {
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
+                {
+                    IEnumerable<User> users = db.Users;
+                    var viewModel = new AuthViewModel() { Users = users.ToList() };
 
-            return View(viewModel);
+                    return View(viewModel);
+                }
+            }
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
         [HttpPost]
@@ -34,18 +44,28 @@ namespace podcast_web.Controllers
         [HttpGet]
         public ActionResult EditUser(int id)
         {
-            IEnumerable<User> users = db.Users;
-            User user = new User();
-
-            foreach (var u in users.ToList())
+            if (Session["Email"] != null)
             {
-                if (u.UserId == id)
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
                 {
-                    user = u;
-                    break;
+                    IEnumerable<User> users = db.Users;
+                    User _user = new User();
+
+                    foreach (var u in users.ToList())
+                    {
+                        if (u.UserId == id)
+                        {
+                            _user = u;
+                            break;
+                        }
+                    }
+                    return View(_user);
                 }
             }
-            return View(user);
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
         [HttpPost]

@@ -17,29 +17,68 @@ namespace podcast_web.Controllers
         // GET: ManagePodcasts
         public ActionResult PodcastList()
         {
-            IEnumerable<Podcast> podcasts = db.Podcasts;
-            var viewModel = new PodcastsViewModel() { Podcasts = podcasts.ToList() };
+            if (Session["Email"] != null)
+            {
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
+                {
+                    IEnumerable<Podcast> podcasts = db.Podcasts;
+                    var viewModel = new PodcastsViewModel()
+                    {
+                        Podcasts = podcasts.ToList(),
+                    };
+                    SelectList authors = new SelectList(db.Authors, "AuthorID", "Name");
+                    SelectList pLangs = new SelectList(db.ProgrammingLanguages, "ProgrammingLanguageID", "Name");
+                    SelectList platforms = new SelectList(db.Platforms, "PlatformId", "Name");
 
-            return View(viewModel);
+                    ViewBag.Podcasts = viewModel.Podcasts;
+                    ViewBag.Platforms = platforms;
+                    ViewBag.ProgrammingLanguages = pLangs;
+                    ViewBag.Authors = authors;
+
+                    return View();
+                }
+            }
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
 
         [HttpGet]
         public ActionResult EditPodcast(int id)
         {
-            IEnumerable<Podcast> podcasts = db.Podcasts;
-            Podcast podcast = new Podcast();
-
-            foreach (var p in podcasts.ToList())
+            if (Session["Email"] != null)
             {
-                if (p.PodcastId == id)
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
                 {
-                    podcast = p;
-                    break;
+                    SelectList authors = new SelectList(db.Authors, "AuthorID", "Name");
+                    SelectList pLangs = new SelectList(db.ProgrammingLanguages, "ProgrammingLanguageID", "Name");
+                    SelectList platforms = new SelectList(db.Platforms, "PlatformId", "Name");
+
+                    IEnumerable<Podcast> podcasts = db.Podcasts;
+                    Podcast podcast = new Podcast();
+
+                    ViewBag.Platforms = platforms;
+                    ViewBag.ProgrammingLanguages = pLangs;
+                    ViewBag.Authors = authors;
+
+                    foreach (var p in podcasts.ToList())
+                    {
+                        if (p.PodcastId == id)
+                        {
+                            podcast = p;
+                            break;
+                        }
+                    }
+
+                    return View(podcast);
                 }
             }
+            return RedirectToAction("Error403", "Home", new { area = "" });
 
-            return View(podcast);
         }
 
         [HttpPost]

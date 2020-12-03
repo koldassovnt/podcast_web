@@ -25,15 +25,15 @@
                             <img class="card-img-top" src="@a.AuthorImg" alt="Card image cap">
                             <h2 class="card-title" style="margin:0;">@a.Name  @a.Surname</h2>
                             <p class="card-text">@a.AuthorJob</p>
-                            @*<h6>Podcasts: </h6>
+                            <h3>Podcasts: </h3>
                             @foreach (var p in a.Podcasts)
                             {
-                                <p>@p.Title</p>
-                            }*@
+                                <p>@p.Title / @p.Date</p>
+                            }
                             <a href="/Author/Detail/@a.AuthorID" class="btn btn-primary">Detail</a>
                         </div>
                         <div class="card-footer">
-                            <h4 class="card-text">@Model.Companies.First(c => c.CompanyID == a.CompanyID).Name</h4>
+                            <h4 class="card-text">Works in: @Model.Companies.First(c => c.CompanyID == a.CompanyID).Name</h4>
                         </div>
 
                     </div>

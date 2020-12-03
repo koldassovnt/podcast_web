@@ -54,12 +54,20 @@ namespace podcast_web.Models
                 AuthorID = 3, ProgrammingLanguageID = 4}
             };
 
+            var roles = new List<Role>
+            {
+                new Role {Name = "ROLE_ADMIN"},
+                new Role {Name = "ROLE_MODERATOR"},
+                new Role {Name = "ROLE_USER"}
+            };
+
             //users.ForEach(u => db.Users.Add(u));
             companies.ForEach(c => db.Companies.Add(c));
             authors.ForEach(a => db.Authors.Add(a));
             platforms.ForEach(p => db.Platforms.Add(p));
             prog_langs.ForEach(pl => db.ProgrammingLanguages.Add(pl));
             podcasts.ForEach(pod => db.Podcasts.Add(pod));
+            roles.ForEach(r => db.Roles.Add(r));
 
             db.SaveChanges();
         }

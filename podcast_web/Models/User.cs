@@ -10,7 +10,10 @@ namespace podcast_web.Models
     // : IdentityUser
     public class User
     {
-        public User() => Podcasts = new HashSet<Podcast>();
+        public User() { 
+            Podcasts = new HashSet<Podcast>();
+            Roles = new HashSet<Role>();
+        }
 
         public int UserId { get; set; }
 
@@ -31,7 +34,7 @@ namespace podcast_web.Models
         public string Password { get; set; }
         public string Birthdate { get; set; }
         public virtual ICollection<Podcast> Podcasts { get; set; }
-
+        public virtual ICollection<Role> Roles { get; set; }
 
         [NotMapped]
         [Required]

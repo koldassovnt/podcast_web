@@ -17,10 +17,20 @@ namespace podcast_web.Controllers
         // GET: ManageProgrammingLanguages
         public ActionResult ProgrammingLanguageList()
         {
-            IEnumerable<ProgrammingLanguage> pLang = db.ProgrammingLanguages;
-            var viewModel = new ProgrammingLanguageViewModel() { ProgrammingLanguages = pLang.ToList() };
+            if (Session["Email"] != null)
+            {
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
+                {
+                    IEnumerable<ProgrammingLanguage> pLang = db.ProgrammingLanguages;
+                    var viewModel = new ProgrammingLanguageViewModel() { ProgrammingLanguages = pLang.ToList() };
 
-            return View(viewModel);
+                    return View(viewModel);
+                }
+            }
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
         [HttpPost]
@@ -42,18 +52,28 @@ namespace podcast_web.Controllers
         [HttpGet]
         public ActionResult EditProgrammingLanguage(int id)
         {
-            IEnumerable<ProgrammingLanguage> pLangs = db.ProgrammingLanguages;
-            ProgrammingLanguage pLang = new ProgrammingLanguage();
-
-            foreach (var p in pLangs.ToList())
+            if (Session["Email"] != null)
             {
-                if (p.ProgrammingLanguageID == id)
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
                 {
-                    pLang = p;
-                    break;
+                    IEnumerable<ProgrammingLanguage> pLangs = db.ProgrammingLanguages;
+                    ProgrammingLanguage pLang = new ProgrammingLanguage();
+
+                    foreach (var p in pLangs.ToList())
+                    {
+                        if (p.ProgrammingLanguageID == id)
+                        {
+                            pLang = p;
+                            break;
+                        }
+                    }
+                    return View(pLang);
                 }
             }
-            return View(pLang);
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
         [HttpPost]

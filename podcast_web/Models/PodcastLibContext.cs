@@ -61,6 +61,14 @@ namespace podcast_web.Models
                     ppl.ToTable("PodcastPlatform");
                 });
 
+            modelBuilder.Entity<User>()
+                .HasMany<Role>(u => u.Roles)
+                .WithMany(r => r.Users)
+                .Map(ur => {
+                    ur.MapLeftKey("UserId");
+                    ur.MapRightKey("RoleId");
+                    ur.ToTable("UserRole");
+                });
         }
 
     }

@@ -18,10 +18,21 @@ namespace podcast_web.Controllers
         // GET: ManagePlatforms
         public ActionResult PlatformList()
         {
-            IEnumerable<Platform> platforms = db.Platforms;
-            var viewModel = new PlatformViewModel() { Platforms = platforms.ToList() };
+            if (Session["Email"] != null)
+            {
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
+                {
 
-            return View(viewModel);
+                    IEnumerable<Platform> platforms = db.Platforms;
+                    var viewModel = new PlatformViewModel() { Platforms = platforms.ToList() };
+
+                    return View(viewModel);
+                }
+            }
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
 
@@ -44,18 +55,29 @@ namespace podcast_web.Controllers
         [HttpGet]
         public ActionResult EditPlatform(int id)
         {
-            IEnumerable<Platform> platforms = db.Platforms;
-            Platform platform = new Platform();
-
-            foreach (var p in platforms.ToList())
+            if (Session["Email"] != null)
             {
-                if (p.PlatformId == id)
+                string email = Session["Email"].ToString();
+                var user = db.Users.FirstOrDefault(s => s.Email == email);
+                if (user != null && user.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
                 {
-                    platform = p;
-                    break;
+
+                    IEnumerable<Platform> platforms = db.Platforms;
+                    Platform platform = new Platform();
+
+                    foreach (var p in platforms.ToList())
+                    {
+                        if (p.PlatformId == id)
+                        {
+                            platform = p;
+                            break;
+                        }
+                    }
+                    return View(platform);
                 }
             }
-            return View(platform);
+            return RedirectToAction("Error403", "Home", new { area = "" });
+
         }
 
         [HttpPost]

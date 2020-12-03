@@ -27,6 +27,8 @@
                         <div class="card-body">
                             <h3 class="card-title" style="margin:0;">@p.Title</h3>
                             <p class="card-text">@p.Description</p>
+                            <p class="card-text">Author is: @p.Author.Name</p>
+                            <p class="card-text">Programming Language: @p.ProgrammingLanguage.Name</p>
                             <a href="/Podcast/Detail/@p.PodcastId" class="btn btn-primary">Detail</a>
                         </div>
                         <div class="card-footer">@p.Date</div>

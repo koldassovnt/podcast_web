@@ -224,6 +224,7 @@
     <Compile Include="Controllers\ManageRolesController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\PodcastController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,6 +246,7 @@
     <Compile Include="ViewModels\PodcastsViewModel.cs" />
     <Compile Include="ViewModels\ProgrammingLanguageViewModel.cs" />
     <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-darkly.css" />
@@ -359,6 +361,8 @@
     <Content Include="Views\ManageUsers\EditUser.cshtml" />
     <Content Include="Views\ManageRoles\RoleList.cshtml" />
     <Content Include="Views\ManageRoles\EditRole.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Home\Error403.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

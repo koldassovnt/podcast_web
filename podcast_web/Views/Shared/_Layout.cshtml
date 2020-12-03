@@ -27,8 +27,16 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Podcasts", "All", "Podcast")</li>
                     <li>@Html.ActionLink("Authors", "Authors", "Author")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Auth")</li>
-                    <li>@Html.ActionLink("Register", "Register", "Auth")</li>
+                    @if (Session["Email"] == null)
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Auth")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Auth")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink(Session["FullName"].ToString(), "Index", "Profile")</li>
+                        <li>@Html.ActionLink("LogOut", "Logout", "Auth")</li>
+                    }
                 </ul>
             </div>
 
