@@ -5,7 +5,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://www.flaticon.com/svg/static/icons/svg/2368/2368382.svg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Podcast_Web Project</h3>
