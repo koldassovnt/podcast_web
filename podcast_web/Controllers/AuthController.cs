@@ -30,7 +30,7 @@ namespace podcast_web.Controllers
             var role = roles.FirstOrDefault(r => r.Name == "ROLE_USER");
             if (role == null)
             {
-                role = new Role() { Name = "ROLE_USER" };
+                role = new Role("ROLE_USER");
                 db.Roles.Add(role);
             }
             user.Roles.Add(role);
@@ -112,6 +112,11 @@ namespace podcast_web.Controllers
 
             }
             return byte2String;
+        }
+
+        public JsonResult IsUserNameAvailable(string UserName)
+        {
+            return Json(!db.Users.Any(u => u.Email == UserName), JsonRequestBehavior.AllowGet);
         }
     }
 }

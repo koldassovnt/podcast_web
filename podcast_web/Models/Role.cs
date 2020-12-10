@@ -8,6 +8,15 @@ namespace podcast_web.Models
     // : IdentityRole
     public class Role 
     {
+        public Role()
+        {
+        }
+
+        public Role(string name)
+        {
+            Name = name;
+        }
+
         public int RoleId { get; set; }
         public string Name { get; set; }
         public virtual ICollection<User> Users { get; set; }

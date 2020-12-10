@@ -15,7 +15,12 @@ namespace podcast_web.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-            string email = Session["Email"].ToString();
+            string email = "";
+
+            if (Session["Email"] != null)
+            {
+                email = Session["Email"].ToString();
+            }
 
             var user = db.Users.FirstOrDefault(s => s.Email == email);
             var userRoles = db.Roles.Where(r => r.Users.Any(u => u.UserId == user.UserId));

@@ -58,8 +58,6 @@ namespace podcast_web.Controllers
                                         .Select(p => new { value = p.Title })
                                         .Distinct();
                 
-
-
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 

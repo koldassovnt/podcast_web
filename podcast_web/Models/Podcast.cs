@@ -14,6 +14,17 @@ namespace podcast_web.Models
             Platforms = new HashSet<Platform>();
         }
 
+        public Podcast(string date, string title, string source, string imgSource, string description, int authorID, int programmingLanguageID)
+        {
+            Date = date;
+            Title = title;
+            Source = source;
+            ImgSource = imgSource;
+            Description = description;
+            AuthorID = authorID;
+            ProgrammingLanguageID = programmingLanguageID;
+        }
+
         public int PodcastId { get; set; }
         public string Date { get; set; }
         public string Title { get; set; }

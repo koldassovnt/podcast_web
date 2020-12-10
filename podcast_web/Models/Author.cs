@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace podcast_web.Models
 {
     public class Author
     {
+        public Author()
+        {
+        }
+
+        public Author(string name, string surname, string authorJob, int companyID, string authorImg)
+        {
+            Name = name;
+            Surname = surname;
+            AuthorJob = authorJob;
+            AuthorImg = authorImg;
+            CompanyID = companyID;
+        }
+
         public int AuthorID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

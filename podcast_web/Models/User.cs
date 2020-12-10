@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace podcast_web.Models
 {
     // : IdentityUser
     public class User
     {
+
         public User() { 
             Podcasts = new HashSet<Podcast>();
             Roles = new HashSet<Role>();
@@ -27,6 +29,7 @@ namespace podcast_web.Models
 
         [Required]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        [Remote("IsUserNameAvailable", "Users", ErrorMessage = "Email is not available")]
         public string Email { get; set; }
 
         [Required]
