@@ -8,10 +8,8 @@ using System.Web;
 namespace podcast_web.Models
 {
 
-    // : IdentityDbContext<User>
     public class PodcastLibContext : DbContext
     {
-
         public PodcastLibContext() : base("PodcastLibContext")
         {
         }
@@ -22,6 +20,7 @@ namespace podcast_web.Models
         public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Audio> Audios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -69,6 +68,10 @@ namespace podcast_web.Models
                     ur.MapRightKey("RoleId");
                     ur.ToTable("UserRole");
                 });
+
+            modelBuilder.Entity<Podcast>()
+                .HasOptional(a => a.Audio)
+                .WithRequired(p => p.Podcast);
         }
 
     }

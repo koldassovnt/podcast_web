@@ -17,6 +17,15 @@ namespace podcast_web.Models
             CompanyID = companyID;
         }
 
+        public Author(int Id, string name, string surname, string authorJob, int companyID, string authorImg)
+        {
+            AuthorID = Id;
+            Name = name;
+            Surname = surname;
+            AuthorJob = authorJob;
+            AuthorImg = authorImg;
+            CompanyID = companyID;
+        }
         public int AuthorID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

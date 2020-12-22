@@ -25,6 +25,18 @@ namespace podcast_web.Models
             ProgrammingLanguageID = programmingLanguageID;
         }
 
+        public Podcast(int Id, string date, string title, string source, string imgSource, string description, int authorID, int programmingLanguageID)
+        {
+            PodcastId = Id;
+            Date = date;
+            Title = title;
+            Source = source;
+            ImgSource = imgSource;
+            Description = description;
+            AuthorID = authorID;
+            ProgrammingLanguageID = programmingLanguageID;
+        }
+
         public int PodcastId { get; set; }
         public string Date { get; set; }
         public string Title { get; set; }
@@ -37,6 +49,7 @@ namespace podcast_web.Models
         public virtual ICollection<Platform> Platforms { get; set; }
         public int ProgrammingLanguageID { get; set; }
         public ProgrammingLanguage ProgrammingLanguage { get; set; }
-
+        public virtual Audio Audio { get; set; }
+        public int? AudioId { get; set; }
     }
 }

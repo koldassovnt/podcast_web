@@ -12,6 +12,12 @@ namespace podcast_web.Models
             Name = name;
         }
 
+        public Platform(int Id, string name)
+        {
+            PlatformId = Id;
+            Name = name;
+        }
+
         public int PlatformId { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Podcast> Podcasts { get; set; }

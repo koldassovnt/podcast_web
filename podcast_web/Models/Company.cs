@@ -11,6 +11,13 @@ namespace podcast_web.Models
         {
         }
 
+        public Company(int Id, string name, string description)
+        {
+            CompanyID = Id;
+            Name = name;
+            Description = description;
+        }
+
         public Company(string name, string description)
         {
             Name = name;

@@ -39,6 +39,7 @@ namespace podcast_web.Controllers
             IEnumerable<Podcast> podcasts = db.Podcasts;
             IEnumerable<Author> authors = db.Authors;
             IEnumerable<ProgrammingLanguage> pLangs = db.ProgrammingLanguages;
+            IEnumerable<Audio> audios = db.Audios;
             Podcast podcast = new Podcast();
 
             foreach (var p in podcasts.ToList())
@@ -51,9 +52,10 @@ namespace podcast_web.Controllers
             }
             var a = authors.Single(au => au.AuthorID == podcast.AuthorID);
             var pl = pLangs.Single(plang => plang.ProgrammingLanguageID == podcast.ProgrammingLanguageID);
+            var audio = audios.Single(aud => aud.Id == podcast.AudioId);
             podcast.Author = a;
             podcast.ProgrammingLanguage = pl;
-
+            podcast.Audio = audio;
 
             return View(podcast);
         }

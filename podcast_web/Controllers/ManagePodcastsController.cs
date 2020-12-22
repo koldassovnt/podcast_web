@@ -31,11 +31,13 @@ namespace podcast_web.Controllers
                     SelectList authors = new SelectList(db.Authors, "AuthorID", "Name");
                     SelectList pLangs = new SelectList(db.ProgrammingLanguages, "ProgrammingLanguageID", "Name");
                     SelectList platforms = new SelectList(db.Platforms, "PlatformId", "Name");
+                    SelectList audios = new SelectList(db.Audios, "Id", "Name");
 
                     ViewBag.Podcasts = viewModel.Podcasts;
                     ViewBag.Platforms = platforms;
                     ViewBag.ProgrammingLanguages = pLangs;
                     ViewBag.Authors = authors;
+                    ViewBag.Audios = audios;
 
                     return View();
                 }
@@ -57,6 +59,7 @@ namespace podcast_web.Controllers
                     SelectList authors = new SelectList(db.Authors, "AuthorID", "Name");
                     SelectList pLangs = new SelectList(db.ProgrammingLanguages, "ProgrammingLanguageID", "Name");
                     SelectList platforms = new SelectList(db.Platforms, "PlatformId", "Name");
+                    SelectList audios = new SelectList(db.Audios, "Id", "Name");
 
                     IEnumerable<Podcast> podcasts = db.Podcasts;
                     Podcast podcast = new Podcast();
@@ -64,6 +67,7 @@ namespace podcast_web.Controllers
                     ViewBag.Platforms = platforms;
                     ViewBag.ProgrammingLanguages = pLangs;
                     ViewBag.Authors = authors;
+                    ViewBag.Audios = audios;
 
                     foreach (var p in podcasts.ToList())
                     {

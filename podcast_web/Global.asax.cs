@@ -14,7 +14,7 @@ namespace podcast_web
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new DbInitializar());
+            Database.SetInitializer(new DBInitializer());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -16,6 +16,12 @@ namespace podcast_web.Models
             Name = name;
         }
 
+        public ProgrammingLanguage(int Id, string name)
+        {
+            ProgrammingLanguageID = Id;
+            Name = name;
+        }
+
         public int ProgrammingLanguageID { get; set; }
         public string Name { get; set; }
         public ICollection<Podcast> Podcasts { get; set; }

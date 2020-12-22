@@ -15,9 +15,16 @@
         </div>
         <div class="card-body">
             <h1 class="card-title" style="margin:0;">@Model.Title</h1>
-            <p class="card-text">@Model.Description</p>
+            <p class="card-text" style="width:720px;">@Model.Description</p>
             <p class="card-text">Author is: @Model.Author.Name</p>
             <p class="card-text">Programming Language: @Model.ProgrammingLanguage.Name</p>
+            <br />
+            <div>
+                <audio controls>
+                    <source src="@Url.Content(@Model.Audio.FilePath)" type="audio/ogg">
+                </audio>
+            </div>
+
         </div>
         <div class="card-footer">@Model.Date</div>
 
