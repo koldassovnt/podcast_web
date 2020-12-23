@@ -14,7 +14,10 @@
         <div class="col-lg-3">
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
-                    <div class="profile mr-3"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" alt="..." width="130" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a></div>
+                    <div class="profile mr-3">
+                        <img src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                        @*<a data-toggle="modal" data-target="#exampleModal" href="#exampleModal" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>*@
+                    </div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0">@Model.User.FullName()</h4>
                         <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>@Model.User.Birthdate</p>
@@ -30,7 +33,7 @@
                 </div>
                 @if (Model.Roles.FirstOrDefault(r => r.Name == "ROLE_ADMIN") != null)
                 {
-                    <a href = "/ManageUsers/UserList" class="btn btn-primary">Admin panel</a>
+                    <a href="/ManageUsers/UserList" class="btn btn-primary">Admin panel</a>
 
                 }
             </div>
@@ -49,12 +52,12 @@
                     foreach (var p in Model.Podcasts)
                     {
                         <div class="card">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <img src="@p.ImgSource" class="card-img-top" alt="...">
+                            <div style="display:flex; justify-content:center;">
+                                <img style="width:640px; height:520px;" src="@p.ImgSource" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <h3 class="card-title" style="margin:0;">@p.Title</h3>
-                                <p class="card-text">@p.Description</p>
+                                <p class="card-text" style="width:640px;">@p.Description</p>
                                 <a href="/Podcast/Detail/@p.PodcastId" class="btn btn-primary">Detail</a>
                             </div>
                             <div class="card-footer">@p.Date</div>
@@ -68,3 +71,50 @@
         </div>
     </div>
 </div>
+
+
+@*<div class="modal fade" id="exampleModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit User</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Index", "Profile", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(model => model.User.UserId)
+                        @Html.HiddenFor(model => model.User.Password)
+                        @Html.HiddenFor(model => model.User.ConfirmPassword)
+                        <div class="form-group">
+                            <label>
+                                Email:
+                                @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Name:
+                                @Html.EditorFor(model => model.User.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Surname:
+                                @Html.EditorFor(model => model.User.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Birthdate:
+                                @Html.EditorFor(model => model.User.Birthdate, new { htmlAttributes = new { @class = "form-control" } })
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Edit</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>*@

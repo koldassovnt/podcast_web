@@ -1,4 +1,4 @@
-﻿@model podcast_web.ViewModels.AuthViewModel
+﻿@model podcast_web.Models.User
 
 @{
     ViewBag.Title = "PlatformList";
@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.Users.Count == 0)
+                @if (ViewBag.Users.Count == 0)
                 {
                     <tr>
                         <td>No users yet!</td>
@@ -42,7 +42,7 @@
                 }
                 else
                 {
-                    foreach (var u in Model.Users)
+                    foreach (var u in ViewBag.Users)
                     {
                         <tr>
                             <td>@u.UserId</td>
@@ -51,7 +51,6 @@
                             <td>@u.Email</td>
                             <td>@u.Birthdate</td>
                             <td>
-                                <a href="/ManageUsers/EditUser/@u.UserId" class="btn btn-primary">Detail</a>
                                 <a style="margin-left:4px;" href="/ManageUsers/DeleteUser/@u.UserId" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
@@ -66,28 +65,64 @@
 
 
 
-@*<div class="modal fade" id="exampleModal">
+<div class="modal fade" id="exampleModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Company</h4>
+                <h4 class="modal-title">Add New User</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("PlatformList", "ManagePlatforms", FormMethod.Post))
+                @using (Html.BeginForm("UserList", "ManageUsers", FormMethod.Post))
                 {
-                    <div class="form-group">
-                        <label>
-                            Platform Name:
-                            <input type="text" class="form-control" name="name">
-                        </label>
+                    @Html.AntiForgeryToken()
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Name)
+                                @Html.TextBoxFor(m => m.Name, "", new { @class = "form-control", @placeholder = "First Name" })
+                                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "badge badge-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Surname)
+                                @Html.TextBoxFor(m => m.Surname, "", new { @class = "form-control", @placeholder = "Last Name" })
+                                @Html.ValidationMessageFor(m => m.Surname, "", new { @class = "badge badge-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email)
+                                @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "badge badge-danger" })
+                                @if (ViewBag.error != null)
+                                {
+                                    <span class="badge badge-danger">@ViewBag.error</span>
+                                }
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password)
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "badge badge-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ConfirmPassword)
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confim Password" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Birthdate)
+                                @Html.TextBoxFor(m => m.Birthdate, "", new { @class = "form-control", @placeholder = "Birthdate" })
+                                @Html.ValidationMessageFor(m => m.Birthdate, "", new { @class = "badge badge-danger" })
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-primary" value="Add" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Add</button>
-                    </div>
+
                 }
             </div>
         </div>
     </div>
-</div>*@
+</div>
 

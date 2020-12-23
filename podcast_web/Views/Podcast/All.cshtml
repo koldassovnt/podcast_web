@@ -21,12 +21,12 @@
                 foreach (var p in Model.Podcasts)
                 {
                     <div class="card">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <img src="@p.ImgSource" class="card-img-top" alt="...">
+                        <div style="display:flex; justify-content:center;">
+                            <img style="width:640px; height:520px;" src="@p.ImgSource" class="card-img-top" alt="...">
                         </div>
                         <div class="card-body">
                             <h3 class="card-title" style="margin:0;">@p.Title</h3>
-                            <p class="card-text">@p.Description</p>
+                            <p class="card-text" style="width:640px;">@p.Description</p>
                             <p class="card-text">Author is: @p.Author.Name</p>
                             <p class="card-text">Programming Language: @p.ProgrammingLanguage.Name</p>
                             <a href="/Podcast/Detail/@p.PodcastId" class="btn btn-primary">Detail</a>

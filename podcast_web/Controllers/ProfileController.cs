@@ -2,6 +2,7 @@
 using podcast_web.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,6 +35,14 @@ namespace podcast_web.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(User user)
+        {
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [Route("Profile/AddUserPodcast/{id}")]
